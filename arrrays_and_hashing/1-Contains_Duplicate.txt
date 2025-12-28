@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool hasDuplicate(vector<int>& nums) {
+
+        unordered_set<int> present;
+
+        for (int num:nums){
+        if(present.count(num)>0)
+        return true;
+        present.insert(num);}
+
+        return false;
+
+        
+    }
+};
+
+
+
+unordered set - basically a hash set.
+adds values and can easily check if they are present
