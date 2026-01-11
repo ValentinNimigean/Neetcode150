@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+
+        int freq[27];
+        for (int i=0;i<27;i++){
+            freq[i]=0;}
+        if(s.length()!=t.length()){
+            return false;
+        }
+
+        for (int i=0;i<s.length();i++){
+            int c=s[i]-'0'-49;
+            freq[c]++;
+            c=t[i]-'0'-49;
+            freq[c]--;
+        }
+        for (int i=0;i<27;i++){
+          if(freq[i]!=0){
+            return false;
+          }
+        }
+
+            return true;
+        
+    }
+};
+
+note:simple frequency vector
