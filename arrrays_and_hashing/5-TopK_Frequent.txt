@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map <int,int> frequency_map;
+
+        for (int i=0;i<nums.size();i++){
+            frequency_map[nums[i]]++;
+        }
+
+
+        vector<pair<int,int>>sorted_by_frequency;
+
+        for(const auto& p: frequency_map){
+            sorted_by_frequency.push_back({p.second,p.first});
+        }        
+
+        sort(sorted_by_frequency.rbegin(),sorted_by_frequency.rend());
+
+        vector<int> result;
+
+        for (int i=0;i<k;i++){
+            result.push_back(sorted_by_frequency[i].second);
+        }
+
+        return result;
+
+
+    }
+};
+
+
+notes:i've used a map paired with a paired vector that i sorted.
+
+RBEGIN and REND are used to give me the reverse iterator for going through the vector
