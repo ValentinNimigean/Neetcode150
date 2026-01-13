@@ -1,0 +1,64 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+
+        sort(nums.begin(),nums.end());
+        int maximum=0;
+        int current_size=0;
+
+        for(int i=0;i<nums.size();i++){
+
+            if(i!=0){
+                if(nums[i]==nums[i-1]+1)
+                current_size++;
+
+                if(nums[i]==nums[i-1])
+                continue;
+
+                if(nums[i]>nums[i-1]+1)
+                current_size=1;
+                
+
+
+                
+            }
+            else{
+                current_size=1;
+            }
+
+
+            if(current_size>maximum){
+                maximum=current_size;
+            }
+
+        }
+
+        return maximum;
+        
+    }
+};
+
+
+initial solution using sorting - O(nlogn)
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+
+      unordered_set<int> numbers_set(nums.begin(),nums.end());//i create a set with all nmbers present in nums
+      int longest=0;
+      for (int num:numbers_set){
+        if(numbers_set.find(num-1)==numbers_set.end()){
+            int lenght=1;
+            while(numbers_set.find(num+lenght)!=numbers_set.end()){
+                lenght++;
+            }
+            longest=max(longest,lenght);
+        }
+      }
+
+      return longest;
+        
+    }
+};
+approach 2: set - O(n);
