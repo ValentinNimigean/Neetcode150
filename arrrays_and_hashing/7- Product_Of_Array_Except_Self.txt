@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+
+        vector <int> prefix(nums.size());
+        vector<int> sufix(nums.size());
+
+        for (int i=0;i<nums.size();i++){
+            if(i==0){
+                prefix[i]=1;
+            }
+            else{
+                prefix[i]=prefix[i-1]*nums[i-1];
+            }
+        }
+        for (int i=nums.size()-1;i>=0;i--){
+            if(i==nums.size()-1){
+                sufix[i]=1;
+            }
+            else{
+                sufix[i]=sufix[i+1]*nums[i+1];
+            }
+
+        }
+
+        vector <int> result;
+
+        for (int i=0;i<nums.size();i++){
+            result.push_back(prefix[i]*sufix[i]);
+            
+        }
+        return result;
+
+
+
+    }
+};
+
+
+note : used vectors that hold the products of all preceeding members in the array and of all succeeding vectors in the array
