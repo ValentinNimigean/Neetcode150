@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+     
+        string left;
+        string right;
+        for(int i=0;i<s.length();i++){
+            if(isalnum(s[i])){
+                left.push_back(tolower(s[i]));
+            }
+            if(isalnum(s[s.length()-i-1])){
+                right.push_back(tolower(s[s.length()-i-1]));
+            }
+        }
+
+        if(left==right)
+        return true;
+        else
+        return false;
+
+    }
+};
+
+pretty straightforward approach
