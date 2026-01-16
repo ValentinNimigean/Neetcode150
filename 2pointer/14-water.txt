@@ -1,0 +1,81 @@
+class Solution {
+public:
+    int trap(vector<int>& height) { 
+
+        int left=0;
+        int right=1;
+        vector<int> volume_left(height.size());
+        vector<int> volume_right(height.size());
+        
+        int maximum=0;
+        if(height.size()<3){
+            return 0;
+        }
+
+
+        
+        while(right<height.size())
+        {
+            while(height[left]>height[right]&&right<height.size()){
+                volume_left[right]=height[left]-height[right];
+                right++;
+            }
+            
+            if(right==height.size()&&height[left]>height[right])
+            {
+                right=left+1;
+                while(right<height.size()){
+                    volume_left[right]=0;
+                    right++;
+                }
+
+                right++;
+
+            }
+            else{
+                left=right;
+                right=left+1;
+            }
+
+        }
+
+
+        right=height.size()-1;
+        left=right-1;
+
+        while(left>=0)
+        {
+            while(height[right]>height[left]&&left>=0){
+                volume_right[left]=height[right]-height[left];
+                left--;
+            }
+            if(left==-1&&height[right]>height[left])
+            {
+                left=right-1;
+                while(left>=0){
+                    volume_right[left]=0;
+                    left--;
+                }
+
+                left--;
+
+            }
+            else{
+                right=left;
+                left=right-1;
+            }
+
+        }
+
+
+        for(int i=0;i<height.size();i++){
+            maximum=maximum+max(volume_left[i],volume_right[i]);
+        }
+
+       
+        return maximum;
+
+
+        
+    }
+};
