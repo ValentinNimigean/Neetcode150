@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool isValid(string s) {
+
+        stack <char> paranteze;
+
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='['||s[i]=='('||s[i]=='{'){
+                paranteze.push(s[i]);
+            }else
+            {
+            if(paranteze.empty()){
+                return false;
+            }
+            if(s[i]==']'){
+                if(paranteze.top()!='[')
+                return false;
+                
+            }
+            if(s[i]==')'){
+                if(paranteze.top()!='(')
+                return false;
+                
+            }
+            if(s[i]=='}'){
+                if(paranteze.top()!='{')
+                return false;
+                
+            }
+         
+
+            paranteze.pop();
+            }
+        }
+
+        if(!paranteze.empty()){
+            return false;
+        }
+        return true;
+        
+    }
+};
