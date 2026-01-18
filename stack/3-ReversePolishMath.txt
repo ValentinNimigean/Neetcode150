@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+
+        stack<int> polish;
+        int a;
+        int b;
+        for (auto p: tokens){
+            if(p!="+"&&p!="-"&&p!="*"&&p!="/"){
+                polish.push(stoi(p));
+            }
+            else{
+                if(polish.size()<2){
+                    return 0;
+                }
+
+                if(p=="+"){
+                    a=polish.top();
+                    polish.pop();
+                    b=polish.top();
+                    polish.pop();
+                    polish.push(a+b);
+                }
+                if(p=="-"){
+                     a=polish.top();
+                    polish.pop();
+                    b=polish.top();
+                    polish.pop();
+                    polish.push(b-a);
+                }
+                if(p=="*"){
+                     a=polish.top();
+                    polish.pop();
+                    b=polish.top();
+                    polish.pop();
+                    polish.push(a*b);
+                }
+                if(p=="/"){
+                     a=polish.top();
+                    polish.pop();
+                    b=polish.top();
+                    polish.pop();
+                    polish.push(b/a);
+                }
+            }
+        }
+        
+
+        return polish.top();
+    }
+};
