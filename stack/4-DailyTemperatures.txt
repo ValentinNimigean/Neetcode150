@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& temperatures) {
+
+        stack<pair<int,int>> temp_stack;
+        vector<int> period(temperatures.size());
+
+        for(int i=0;i<temperatures.size();i++){
+            if(temp_stack.empty()){
+                temp_stack.push(pair(temperatures[i],i));
+            }
+            else
+            { 
+                while(temp_stack.size()>0&&temp_stack.top().first<temperatures[i])
+                {pair<int,int> top=temp_stack.top();
+                period[top.second]=i-top.second;
+                temp_stack.pop();
+                }
+                temp_stack.push(pair(temperatures[i],i));
+
+            }
+
+        }
+
+        return period;
+        
+    }
+};
