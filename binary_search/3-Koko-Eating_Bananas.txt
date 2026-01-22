@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+
+        int left=1;
+        int right=piles[0];
+
+
+        for(int i=0;i<piles.size();i++){
+            if(piles[i]>right){
+                right=piles[i];
+            }
+        }
+        int output=right;
+        while(left<=right){
+            int median=(left+right)/2;
+            cout<<median<<" ";
+            cout<<'\n';
+            int partial=0;
+            for(int & pile: piles){
+                partial=partial+pile/median+(pile%median>0?1:0);
+                cout<<partial<<" ";
+            }
+            cout<<'\n';
+
+            if(median<=output&&partial<=h){
+                output=median;
+                right=median-1;
+
+            }
+            else
+            {
+                left=median+1;
+            }
+        }
+
+        return output;
+        
+    }
+};
