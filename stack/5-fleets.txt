@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+
+        vector<pair<int,int>> pospeed;
+
+        for(int i=0;i<position.size();i++){
+            pospeed.push_back({position[i],speed[i]});
+            
+        }
+
+        sort(pospeed.begin(),pospeed.end());
+
+        int fleets=1;
+
+        double prevtime=(double)(target-pospeed[pospeed.size()-1].first)/pospeed[pospeed.size()-1].second;
+        for(int i=pospeed.size()-2;i>=0;i--){
+            double curtime=(double)(target-pospeed[i].first)/pospeed[i].second;
+            if(curtime>prevtime){
+                fleets++;
+                prevtime=curtime;
+            }
+        }
+
+
+
+        return fleets;
+        
+        
+    }
+};
