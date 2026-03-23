@@ -1,0 +1,65 @@
+class Solution {
+public:
+    void findRestOfIsland(map <pair<int,int>,int>& islander,pair<int,int>coordinates,vector<vector<char>>& grid,int number_of_islands){
+
+
+        auto it=islander.find(coordinates);
+
+        cout<<coordinates.first<<" "<<coordinates.second<<'\n';
+        
+        if(it==islander.end()){
+            islander.insert({coordinates, number_of_islands});
+        if(coordinates.first-1>=0&&grid[coordinates.first-1][coordinates.second]=='1'){
+            pair<int,int> new_coordinates={coordinates.first-1,coordinates.second};
+            findRestOfIsland(islander,new_coordinates,grid,number_of_islands);
+        }
+
+        if(coordinates.first+1<grid.size()&&grid[coordinates.first+1][coordinates.second]=='1'){
+            pair<int,int> new_coordinates={coordinates.first+1,coordinates.second};
+            findRestOfIsland(islander,new_coordinates,grid,number_of_islands);
+        }
+
+        if(coordinates.second-1>=0&&grid[coordinates.first][coordinates.second-1]=='1'){
+            pair<int,int> new_coordinates={coordinates.first,coordinates.second-1};
+            findRestOfIsland(islander,new_coordinates,grid,number_of_islands);
+        }
+        if(coordinates.second+1<grid[coordinates.first].size()&&grid[coordinates.first][coordinates.second+1]=='1'){
+            pair<int,int> new_coordinates={coordinates.first,coordinates.second+1};
+            findRestOfIsland(islander,new_coordinates,grid,number_of_islands);
+        }
+        }
+
+
+
+
+    }
+    int numIslands(vector<vector<char>>& grid) {
+
+        
+        map <pair<int,int>,int> islander;
+        int number_of_islands=0;
+
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[i].size();j++){
+                if(grid[i][j]=='1'){
+                    pair<int,int> coordinates={i,j};
+                    auto already_island=islander.find(coordinates);
+                    if(already_island==islander.end()){
+                        number_of_islands++;
+                    
+                        findRestOfIsland(islander,coordinates,grid,number_of_islands);
+
+                    }
+                }
+            }
+        }
+        cout<<'\n';
+
+        for (auto x: islander){
+        cout << x.first.first << " " <<x.first.second<< " " << x.second<< endl;
+        }
+ 
+
+        return number_of_islands;
+    }
+};
